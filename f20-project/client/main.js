@@ -7,5 +7,6 @@ const createItem = (str) => {
     list.appendChild(item)
 }
 
-const getList = axios.get('/api/list')
-                     .then(res => res.data.forEach(elem => createItem(elem)))
+const getList = axios.get('/api/list').then(res => res.data.forEach(elem => createItem(elem)))
+
+getList()
