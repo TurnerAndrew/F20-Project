@@ -1,4 +1,4 @@
-const list = ['get gas']
+const list = []
 
 module.exports = {
 
