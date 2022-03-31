@@ -9,6 +9,7 @@ app.use(cors())
 
 app.get('/api/list', listCtrl.getList)
 app.post('/api/list', listCtrl.addItem)
+app.delete('/api/list/:id', listCtrl.deleteItem)
 
 
 

@@ -5,10 +5,22 @@ const form = document.getElementById('add-form')
 
 
 //HTML CREATION FUNCTIONS
-const createItem = (str) => {
-    let item = document.createElement('p')
-    item.textContent = str
+const createItem = (obj) => {
+    let item = document.createElement('span')
+    let todo = document.createElement('p')
+    let x = document.createElement('button')
+    x.textContent = 'X'
+    x.id = obj.id
+    todo.textContent = obj.item
+    item.appendChild(todo)
+    item.appendChild(x)
     list.appendChild(item)
+
+    x.addEventListener('click', (e) => {
+        axios.delete(`http://localhost:4040/api/list/${e.target.id}`)
+        .then(res => res.data.forEach(elem => createItem(elem)))
+        clearList()
+    })
 }
 
 const clearList = () => {
@@ -22,7 +34,12 @@ const getList = () => {
 
 const addItem = (todo) => {
     axios.post('http://localhost:4040/api/list', {item: todo}).then(res => res.data.forEach(elem => createItem(elem)))
-}  
+}
+
+// const deleteItem = (id) => {
+//     axios.delete(`http://localhost:4040/api/list/${id}`)
+//         .then(res => res.data.forEach(elem => createItem(elem)))
+// }
 
 //EVENT LISTENERS
 form.addEventListener('submit', (e) => {
